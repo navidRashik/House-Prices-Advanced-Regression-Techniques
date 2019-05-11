@@ -14486,6 +14486,96 @@ dtype: int64</pre>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><b> Befor starting following block its important to understand which feature means what so that describing my work would be easier </b></p>
+<ul>
+<li>SalePrice - the property's sale price in dollars. This is the target variable that you're trying to predict.</li>
+<li>MSSubClass: The building class</li>
+<li>MSZoning: The general zoning classification</li>
+<li>LotFrontage: Linear feet of street connected to property</li>
+<li>LotArea: Lot size in square feet</li>
+<li>Street: Type of road access</li>
+<li>Alley: Type of alley access</li>
+<li>LotShape: General shape of property</li>
+<li>LandContour: Flatness of the property</li>
+<li>Utilities: Type of utilities available</li>
+<li>LotConfig: Lot configuration</li>
+<li>LandSlope: Slope of property</li>
+<li>Neighborhood: Physical locations within Ames city limits</li>
+<li>Condition1: Proximity to main road or railroad</li>
+<li>Condition2: Proximity to main road or railroad (if a second is present)</li>
+<li>BldgType: Type of dwelling</li>
+<li>HouseStyle: Style of dwelling</li>
+<li>OverallQual: Overall material and finish quality</li>
+<li>OverallCond: Overall condition rating</li>
+<li>YearBuilt: Original construction date</li>
+<li>YearRemodAdd: Remodel date</li>
+<li>RoofStyle: Type of roof</li>
+<li>RoofMatl: Roof material</li>
+<li>Exterior1st: Exterior covering on house</li>
+<li>Exterior2nd: Exterior covering on house (if more than one material)</li>
+<li>MasVnrType: Masonry veneer type</li>
+<li>MasVnrArea: Masonry veneer area in square feet</li>
+<li>ExterQual: Exterior material quality</li>
+<li>ExterCond: Present condition of the material on the exterior</li>
+<li>Foundation: Type of foundation</li>
+<li>BsmtQual: Height of the basement</li>
+<li>BsmtCond: General condition of the basement</li>
+<li>BsmtExposure: Walkout or garden level basement walls</li>
+<li>BsmtFinType1: Quality of basement finished area</li>
+<li>BsmtFinSF1: Type 1 finished square feet</li>
+<li>BsmtFinType2: Quality of second finished area (if present)</li>
+<li>BsmtFinSF2: Type 2 finished square feet</li>
+<li>BsmtUnfSF: Unfinished square feet of basement area</li>
+<li>TotalBsmtSF: Total square feet of basement area</li>
+<li>Heating: Type of heating</li>
+<li>HeatingQC: Heating quality and condition</li>
+<li>CentralAir: Central air conditioning</li>
+<li>Electrical: Electrical system</li>
+<li>1stFlrSF: First Floor square feet</li>
+<li>2ndFlrSF: Second floor square feet</li>
+<li>LowQualFinSF: Low quality finished square feet (all floors)</li>
+<li>GrLivArea: Above grade (ground) living area square feet</li>
+<li>BsmtFullBath: Basement full bathrooms</li>
+<li>BsmtHalfBath: Basement half bathrooms</li>
+<li>FullBath: Full bathrooms above grade</li>
+<li>HalfBath: Half baths above grade</li>
+<li>Bedroom: Number of bedrooms above basement level</li>
+<li>Kitchen: Number of kitchens</li>
+<li>KitchenQual: Kitchen quality</li>
+<li>TotRmsAbvGrd: Total rooms above grade (does not include bathrooms)</li>
+<li>Functional: Home functionality rating</li>
+<li>Fireplaces: Number of fireplaces</li>
+<li>FireplaceQu: Fireplace quality</li>
+<li>-GarageType: Garage location</li>
+<li>GarageYrBlt: Year garage was built</li>
+<li>GarageFinish: Interior finish of the garage</li>
+<li>GarageCars: Size of garage in car capacity</li>
+<li>GarageArea: Size of garage in square feet</li>
+<li>GarageQual: Garage quality</li>
+<li>GarageCond: Garage condition</li>
+<li>PavedDrive: Paved driveway</li>
+<li>WoodDeckSF: Wood deck area in square feet</li>
+<li>OpenPorchSF: Open porch area in square feet</li>
+<li>EnclosedPorch: Enclosed porch area in square feet</li>
+<li>3SsnPorch: Three season porch area in square feet</li>
+<li>ScreenPorch: Screen porch area in square feet</li>
+<li>PoolArea: Pool area in square feet</li>
+<li>PoolQC: Pool quality</li>
+<li>Fence: Fence quality</li>
+<li>MiscFeature: Miscellaneous feature not covered in other categories</li>
+<li>MiscVal: $Value of miscellaneous feature</li>
+<li>MoSold: Month Sold</li>
+<li>YrSold: Year Sold</li>
+<li>SaleType: Type of sale</li>
+<li>SaleCondition: Condition of sale</li>
+</ul>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[15]:</div>
@@ -14784,6 +14874,66 @@ dtype: int64</pre>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the above block I have done following operations :</p>
+<ul>
+<li>Filled with 0 for some features like MasVnrArea , GarageArea , TotalBsmtSF etc .According to the documentation of the dataset if these features have any field empty then that means the feature is not available. So I have done this operation according to documentation of the dataset.</li>
+<li>CentralAir feature was given has two field only 'Y' or 'N' so I have converted that to 0 or 1</li>
+<li>For some ordinal features I ave performed lable encoding. Those features are ExterQual , ExterCond, BsmtQual, BsmtCond, HeatingQC, KitchenQual etc</li>
+<li><p>I have converted some features from categorical to numerical and those features are MSSubClass, MSZoning , LotConfig, RL , LotConfig,Neighborhood, Condition1 ,BldgType,  HouseStyle , HouseStyle, Exterior1st, Other, Exterior2nd, MasVnrType, Foundation, SaleType and SaleCondition</p>
+</li>
+<li><p>Converted fields of some Features to 0 or 1 based on the understanding of the dataset and a little bit research. Those features with the changing reasons are given below</p>
+<ul>
+<li>IsRegularLotShape : Field IR2 and IR3 don't appear that often, so just make a distinction between regular and irregular.</li>
+<li>IsLandLevel : Most land slopes are gentle; treat the others as "not gentle".</li>
+<li>IsElectricalSBrkr : Most properties use standard circuit breakers.</li>
+<li>IsGarageDetached : About 2/3rd have an attached garage.</li>
+<li>IsPavedDrive : Most have a paved drive. Treat dirt/gravel and partial pavement as "not paved".</li>
+<li>HasShed : The only interesting "misc. feature" is the presence of a shed.</li>
+<li>Remodeled : If YearRemodAdd != YearBuilt, then a remodeling took place at some point.</li>
+<li>RecentRemodel : Did a remodeling happen in the year the house was sold?</li>
+<li>VeryNewHouse : Was this house sold in the year it was built?</li>
+<li>sofe other features dont need to describe they are self explanatory Has2ndFloor , HasMasVnr , HasWoodDeck .HasOpenPorch ,HasEnclosedPorch ,Has3SsnPorch , HasScreenPorch</li>
+</ul>
+</li>
+<li><p>Simplifications of existing features into bad/average/good. Features : SimplOverallQual, SimplOverallCond, SimplPoolQC ,SimplGarageCond, SimplGarageQual, SimplFireplaceQu ,SimplFunctional ,SimplKitchenQual, SimplHeatingQC ,SimplBsmtFinType1, SimplBsmtFinType2 ,SimplBsmtCond , SimplBsmtQual ,SimplExterCond ,SimplExterQual.</p>
+</li>
+<li><p>mapped neighborhood based on their quality.The mapping is as followed:</p>
+
+<pre><code>  "MeadowV" : 0,  #  88000
+  "IDOTRR" : 1,   # 103000
+  "BrDale" : 1,   # 106000
+  "OldTown" : 1,  # 119000
+  "Edwards" : 1,  # 119500
+  "BrkSide" : 1,  # 124300
+  "Sawyer" : 1,   # 135000
+  "Blueste" : 1,  # 137500
+  "SWISU" : 2,    # 139500
+  "NAmes" : 2,    # 140000
+  "NPkVill" : 2,  # 146000
+  "Mitchel" : 2,  # 153500
+  "SawyerW" : 2,  # 179900
+  "Gilbert" : 2,  # 181000
+  "NWAmes" : 2,   # 182900
+  "Blmngtn" : 2,  # 191000
+  "CollgCr" : 2,  # 197200
+  "ClearCr" : 3,  # 200250
+  "Crawfor" : 3,  # 200624
+  "Veenker" : 3,  # 218000
+  "Somerst" : 3,  # 225500
+  "Timber" : 3,   # 228475
+  "StoneBr" : 4,  # 278000
+  "NoRidge" : 4,  # 290000
+  "NridgHt" : 4,  # 315000
+  - the number after hash is actually median priece of that location. </code></pre>
+</li>
+</ul>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -15879,6 +16029,14 @@ accuracy score:  0.9312440935471524</p>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following ANN is build with 3 hidden layers. Output dimention is 1 because its a regration problem.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[37]:</div>
@@ -16080,7 +16238,7 @@ Use tf.cast instead.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_LC</span> <span class="o">=</span> <span class="p">[]</span>
@@ -16092,6 +16250,14 @@ Use tf.cast instead.
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Above train LC and val Lc variable keeps track of the learning rate so that learning curve can be drwan.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -21692,6 +21858,14 @@ accuracy score:  0.9386976855299631
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Conclusion-&amp;-Kaggle-score-Discussion:">Conclusion &amp; Kaggle score Discussion:<a class="anchor-link" href="#Conclusion-&amp;-Kaggle-score-Discussion:">&#182;</a></h1><p>My target of this report was to improve ANN model and show how well it can perform with ANN model. In the beginning I have tried to build best the a ANN model that performs better than any other single ANN model. I have performed cross validation on that model and that model scored 0.12324 in kaggle. Then I have showed some other models that performs well but can't beat the score .12324 . Then I have explained why some models with certain parameter works well. After that I showed a table where different models performance is listed and added my analysis and observation. Then I have have Showed four combination of Ensemble and their kaggle score is also attached with them. In the 4th combination of Ensemble method I have found the best kaggle score which is 0.12192. This is the overall best score and achived through combining 4 ann models, xgboost and lasso.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Reference">Reference<a class="anchor-link" href="#Reference">&#182;</a></h1><h2 id="xgboost:">xgboost:<a class="anchor-link" href="#xgboost:">&#182;</a></h2><p><a href="https://www.kaggle.com/dansbecker/xgboost">https://www.kaggle.com/dansbecker/xgboost</a></p>
 <p><a href="https://medium.com/@gabrieltseng/gradient-boosting-and-xgboost-c306c1bcfaf5">https://medium.com/@gabrieltseng/gradient-boosting-and-xgboost-c306c1bcfaf5</a></p>
 <h2 id="regression-+-graph-:">regression + graph :<a class="anchor-link" href="#regression-+-graph-:">&#182;</a></h2><p><a href="https://www.kaggle.com/janiobachmann/predicting-house-prices-regression-techniques">https://www.kaggle.com/janiobachmann/predicting-house-prices-regression-techniques</a></p>
@@ -21714,19 +21888,6 @@ accuracy score:  0.9386976855299631
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
 </div>
     </div>
   </div>
